@@ -1,0 +1,104 @@
+﻿@page
+@model AddressBookApp.Pages.IndexModel
+@{
+    ViewData["Title"] = "Customers & Addresses";
+}
+<h2>Customers</h2>
+
+<form method="get" style="display:flex;gap:8px;margin-bottom:12px">
+  <label>Sort by:</label>
+  <select name="sort" onchange="this.form.submit()">
+    <option value="CustomerNumber" selected="@(Model.Sort=="CustomerNumber")">Customer Number</option>
+    <option value="FirstName" selected="@(Model.Sort=="FirstName")">First Name</option>
+    <option value="LastName" selected="@(Model.Sort=="LastName")">Last Name</option>
+  </select>
+  @if (Model.CustomerId.HasValue)
+  { <input type="hidden" name="customerId" value="@Model.CustomerId.Value" /> }
+</form>
+
+@if (!string.IsNullOrWhiteSpace(Model.Error))
+{ <div style="background:#ffecec;border:1px solid #f0c0c0;color:#a40000;padding:10px;border-radius:6px;margin:10px 0">@Model.Error</div> }
+
+<table style="width:100%;border-collapse:collapse;background:#fff">
+  <thead><tr><th>Actions</th><th>CustomerNumber</th><th>FirstName</th><th>LastName</th></tr></thead>
+  <tbody>
+@foreach (var c in Model.Customers)
+{
+  <tr>
+    <td style="white-space:nowrap">
+      <form method="get" style="display:inline">
+        <input type="hidden" name="sort" value="@Model.Sort" />
+        <input type="hidden" name="customerId" value="@c.CustomerID" />
+        <button>Select</button>
+      </form>
+      <form method="post" asp-page-handler="DeleteCustomer" style="display:inline" onsubmit="return confirm('Delete this customer and all their addresses?');">
+        <input type="hidden" name="Id" value="@c.CustomerID" />
+        <input type="hidden" name="sort" value="@Model.Sort" />
+        <button>Delete</button>
+      </form>
+    </td>
+    <td>@c.CustomerNumber</td><td>@c.FirstName</td><td>@c.LastName</td>
+  </tr>
+}
+    <tr style="background:#fcfcff">
+      <td><strong>Add New</strong></td>
+      <td colspan="3">
+        <form method="post" asp-page-handler="AddCustomer" style="display:flex;gap:8px;flex-wrap:wrap">
+          <input type="number" name="CustomerNumber" placeholder="Customer Number" min="0" required />
+          <input type="text" name="FirstName" placeholder="First Name" maxlength="50" required />
+          <input type="text" name="LastName" placeholder="Last Name" maxlength="50" required />
+          <input type="hidden" name="sort" value="@Model.Sort" />
+          <button>Add</button>
+        </form>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+@if (Model.CustomerId.HasValue)
+{
+  <h2 style="margin-top:24px">Addresses for Customer <span style="background:#eef;padding:2px 6px;border-radius:10px">ID @Model.CustomerId</span></h2>
+  <table style="width:100%;border-collapse:collapse;background:#fff">
+    <thead><tr><th>Actions</th><th>Address Type</th><th>Address1</th><th>Address2</th><th>City</th><th>State</th><th>Zip</th><th>Country</th></tr></thead>
+    <tbody>
+@foreach (var a in Model.Addresses)
+{
+  <tr>
+    <td style="white-space:nowrap">
+      <form method="post" asp-page-handler="DeleteAddress" style="display:inline" onsubmit="return confirm('Delete this address?');">
+        <input type="hidden" name="Id" value="@a.AddressID" />
+        <input type="hidden" name="customerId" value="@Model.CustomerId" />
+        <input type="hidden" name="sort" value="@Model.Sort" />
+        <button>Delete</button>
+      </form>
+    </td>
+    <td>@a.AddressType!.Description</td><td>@a.Address1</td><td>@a.Address2</td>
+    <td>@a.City</td><td>@a.State</td><td>@a.Zip</td><td>@a.Country</td>
+  </tr>
+}
+      <tr style="background:#fcfcff">
+        <td><strong>Add New</strong></td>
+        <td colspan="7">
+          <form method="post" asp-page-handler="AddAddress" style="display:flex;gap:8px;flex-wrap:wrap">
+            <input type="hidden" name="CustomerID" value="@Model.CustomerId" />
+            <select name="AddressTypeID" required>
+              @foreach (var t in Model.AddressTypes) { <option value="@t.AddressTypeID">@t.Description</option> }
+            </select>
+            <input type="text" name="Address1" placeholder="Address1" maxlength="100" />
+            <input type="text" name="Address2" placeholder="Address2" maxlength="100" />
+            <input type="text" name="City" placeholder="City" maxlength="50" />
+            <input type="text" name="State" placeholder="State" maxlength="50" />
+            <input type="text" name="Zip" placeholder="Zip" maxlength="50" />
+            <input type="text" name="Country" placeholder="Country" maxlength="50" />
+            <input type="hidden" name="sort" value="@Model.Sort" />
+            <button>Add</button>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+}
+else
+{
+  <blockquote style="background:#fff;border-left:4px solid #ddd;padding:8px">Select a customer to view/manage addresses.</blockquote>
+}

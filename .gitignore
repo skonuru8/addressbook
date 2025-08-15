@@ -1,0 +1,39 @@
+# Build artifacts
+bin/
+obj/
+*.pidb
+*.mdb
+
+# User-specific
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Logs
+*.log
+
+# Environment / secrets
+.env
+secrets.json
+appsettings.Development.json
+
+# SQLite databases
+*.db
+*.db-shm
+*.db-wal
+
+# ASP.NET publish output (optional)
+wwwroot/dist/

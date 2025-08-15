@@ -143,7 +143,6 @@
 /Users/skonuru/AddressBookApp/obj/Debug/net9.0/scopedcss/Pages/Shared/_Layout.cshtml.rz.scp.css
 /Users/skonuru/AddressBookApp/obj/Debug/net9.0/scopedcss/bundle/AddressBookApp.styles.css
 /Users/skonuru/AddressBookApp/obj/Debug/net9.0/scopedcss/projectbundle/AddressBookApp.bundle.scp.css
-/Users/skonuru/AddressBookApp/obj/Debug/net9.0/compressed/3ov513pkny-b9sayid5wm.gz
 /Users/skonuru/AddressBookApp/obj/Debug/net9.0/compressed/p63q0nkijh-61n19gt1b8.gz
 /Users/skonuru/AddressBookApp/obj/Debug/net9.0/compressed/yzrz8yopvy-xtxxf3hu2r.gz
 /Users/skonuru/AddressBookApp/obj/Debug/net9.0/compressed/p0qo2b30zv-bqjiyaj88i.gz
@@ -217,3 +216,5 @@
 /Users/skonuru/AddressBookApp/obj/Debug/net9.0/AddressBookApp.pdb
 /Users/skonuru/AddressBookApp/obj/Debug/net9.0/AddressBookApp.genruntimeconfig.cache
 /Users/skonuru/AddressBookApp/obj/Debug/net9.0/ref/AddressBookApp.dll
+/Users/skonuru/AddressBookApp/obj/Debug/net9.0/AddressBookApp.sourcelink.json
+/Users/skonuru/AddressBookApp/obj/Debug/net9.0/compressed/3ov513pkny-2sdpw7urua.gz
